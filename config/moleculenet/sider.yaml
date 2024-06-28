@@ -1,0 +1,38 @@
+batch_size: 32                                    # batch size
+epochs: 100                                       # total number of epochs
+device: cuda                                      # training device
+seed: 42                                          # random seed
+num_run: 3                                        # number of runs
+verbose: True                                     # verbose
+
+model:
+  backbone: gps                                   # which backbone to use [gin, gps]
+  num_layer: 5                                    # number of graph conv layers
+  emb_dim: 300                                    # embedding dimension in graph conv layers
+  heads: 6                                        # number of attention head of graph transformer
+  layernorm: True                                 # whether apply layernorm
+  dropout_ratio: 0.3                              # dropout ratio
+  attn_dropout_ratio: 0.3                         # dropout ratio for graph transformer's global attention
+  temperature: 0.5                                # temperature for computing prompt weight
+  use_prompt: True                                # whether use prompt, otherwise just use mean pooling
+  normalize: False                                # whether perform l2norm on aggregated output
+  checkpoint: ./checkpoint/zinc-gps_best.pt       # model checkpoint to use
+
+optim:
+  prompt_lr: 0.0001                               # learning rate of prompt selection module
+  pretrain_lr: 0.0001                             # learning rate of pretrain module (encoder + aggrs)
+  finetune_lr: 0.001                              # learning rate of finetune prediction head
+  decay: 1e-6                                     # learning decay
+  gradient_clip: 5                                # gradient clip
+  scheduler: cos_anneal                           # scheduler type [<empty>, cos_anneal, poly_decay]
+
+prompt_optim:
+  skip_bo: True                                   # whether apply bayesian optimization
+  inits: [0, 0, 0]                                # predefined the initial prompt weight
+
+dataset:
+  data_dir: ./data/finetune/moleculenet           # data directory
+  data_name: sider                                # dataset name
+  num_workers: 0                                  # number of workers in dataloader
+  feat_type: super_rich                           # whether use basic/rich/super_rich feature
+  task: classification                            # classification/regression task

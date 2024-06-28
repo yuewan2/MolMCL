@@ -1,0 +1,30 @@
+batch_size: 256                         # batch size
+epochs: 100                             # total number of epochs
+device: cuda                            # training device
+output_dir: ./checkpoint                # model checkpoint output path
+start_epoch: 0                          # start epoch, only used when checkpoint is provided
+method: 'gps_5_300'                     # method name, used for saving checkpoint
+
+model:
+  backbone: gps                         # which backbone to use [gin, gps]
+  num_layer: 5                          # number of graph conv layers
+  emb_dim: 300                          # embedding dimension in graph conv layers
+  heads: 6                              # number of attention head of graph transformer
+  dropout_ratio: 0                      # dropout ratio
+  checkpoint:                           # checkpoint for continuous training
+
+optim:
+  lr: 0.0005                            # learning rate
+  decay: 1e-6                           # weight decay
+  margin: 0.8                           # offset margin value
+  num_candidates: 6                     # number of positive candidates for contrastive learning
+  accum_iter: 1                         # gradient accumulation steps
+  distance_metric: l2norm               # distance metric [l2norm, cossim]
+  adamg_coeff: 1                        # coefficient for adaptive triplet loss
+  reg_coeff: 0.1                        # coefficient for regularization loss
+  knowledge_guided: True
+
+dataset:
+  data_dir: ./data/pretrain             # data directory
+  num_workers: 32                       # dataloader number of workers
+  feat_type: super_rich                 # whether use basic/rich feature
