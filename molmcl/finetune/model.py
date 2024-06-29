@@ -90,6 +90,11 @@ class GNNPredictor(nn.Module):
 
     
     def get_representations(self, data, channel_idx=-1, return_score=False):
+        if return_score:  # for qualitative analysis
+            score_head_i = -1
+        else:
+            score_head_i = 0
+            
         if self.backbone == 'gps':
             h_g, node_repres = self.gnn(data.x, data.pe, data.edge_index, data.edge_attr, data.batch)
         else:
@@ -103,7 +108,7 @@ class GNNPredictor(nn.Module):
             batch_x, batch_mask = to_dense_batch(node_repres, data.batch)
             
             for i in range(len(self.prompt_token)):
-                h_g, h_x, score = self.aggrs[i](batch_x, batch_mask)
+                h_g, h_x, score = self.aggrs[i](batch_x, batch_mask, score_head_i=-1)
                 if self.normalize:
                     h_g = F.normalize(h_g, dim=-1)
                 scores.append(score)
