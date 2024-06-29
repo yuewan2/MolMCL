@@ -38,7 +38,7 @@ We provide two pre-trained checkpoints (with GIN and GPS backbone) [here](https:
 ## Fine-tuning:
 The configuration files for fine-tuning MoleculeNet and MoleculeACE are located in `./config/moleculenet` and `./config/moleculeace`, respectively. The description of the available training options can be found in the yaml file. Run the command below for fine-tuning a specific dataset:
 ```
-python ./scripts/finetune.py <data_folder>/<data_name>  # e.g., moleculenet/clintox
+python ./scripts/finetune.py <data_folder>/<data_name>  # e.g., moleculenet/bace
 ```
 
 ## References:
