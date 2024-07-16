@@ -18,3 +18,6 @@ pip install yaml
 
 pip install -e .
 
+# prepare default folder
+mkdir checkpoint
+

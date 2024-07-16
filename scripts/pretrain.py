@@ -113,6 +113,8 @@ def main(config):
                   attn_type='multihead',
                   dropout=config['model']['dropout_ratio'],
                   attn_dropout=config['model']['dropout_ratio'])
+    else:
+        raise NotImplementedError
 
     model = GNNWrapper(gnn, config['model']['emb_dim'], config,
                        atom_context_size=len(dataset.atom_vocab_itos),
