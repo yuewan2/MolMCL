@@ -129,7 +129,8 @@ class GNNWrapper(nn.Module):
         prompt_inds = torch.concat([self.prompt_inds] * batch_size)
         regu_inds = [batch.regu_inds[i] for i in range(len(batch.regu_inds)) if (prompt_inds == 1)[i]]
         aggr_score = graph_rep[1][2].squeeze(1)
-        aggr_score_regu = aggr_score.new_tensor(aggr_score.data).fill_(0)
+        aggr_score_regu = torch.zeros(aggr_score.size()).to(aggr_score.device)
+        # aggr_score.new_tensor(aggr_score.data).fill_(0)
         for i in range(aggr_score_regu.size(0)):
             if len(regu_inds[i]):
                 aggr_score_regu[i][regu_inds[i]] = 1 / len(regu_inds[i])
@@ -150,8 +151,8 @@ class GNNWrapper(nn.Module):
         context_loss = (context_loss[context_labels.view(-1) != 0]).mean()
 
         motif_labels = torch.FloatTensor(
-            [np.array(batch.mol_mds[i][0][-86:]) for i in range(len(batch.mol_mds)) if
-             i % (self.num_candidates * 2 + 2) == 0]).to(
+            np.array([np.array(batch.mol_mds[i][0][-86:]) for i in range(len(batch.mol_mds)) if
+             i % (self.num_candidates * 2 + 2) == 0])).to(
             h_gr.device)
         h_gr = graph_rep[2][0]
         h_gr = h_gr.view(batch_size, 2, self.emb_dim)
@@ -191,8 +192,8 @@ class GNNWrapper(nn.Module):
             graph_rep_3 = torch.matmul(graph_value.transpose(1, 2), preset_weight_3.unsqueeze(1)).squeeze(2)
 
             mol_fps = torch.FloatTensor(
-                [np.array(batch.mol_fps[i][0]) for i in range(len(batch.mol_fps)) if 
-                 i % (self.num_candidates * 2 + 2) == 0]).to(graph_value.device)
+                np.array([np.array(batch.mol_fps[i][0]) for i in range(len(batch.mol_fps)) if 
+                 i % (self.num_candidates * 2 + 2) == 0])).to(graph_value.device)
             fp_scores = self.fp_func(graph_rep_3)
             fp_loss = F.binary_cross_entropy_with_logits(fp_scores.view(-1), mol_fps.view(-1))
 
