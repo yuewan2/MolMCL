@@ -1,5 +1,5 @@
 # Multi-channel Molecular Representation Learning
-This is the official code repository of the work "*From molecules to scaffolds to functional groups: building context-dependent molecular representation via multi-channel learning*".
+This is the official code repository of the work "*Multi-channel learning for integrating structural hierarchies into context-dependent molecular representation*".
 
 ## Dependency
 
