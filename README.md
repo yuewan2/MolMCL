@@ -42,15 +42,23 @@ python ./scripts/finetune.py <data_folder>/<data_name>  # e.g., moleculenet/bace
 ```
 
 ## References:
-If you find this work useful, please cite as follow. Thanks!
+If you find this work useful, please cite by:
+
+Wan, Y., Wu, J., Hou, T. et al. Multi-channel learning for integrating structural hierarchies into context-dependent molecular representation. Nat Commun 16, 413 (2025). https://doi.org/10.1038/s41467-024-55082-4
+
+or
+
 ```
-@misc{wan2023moleculesscaffoldsfunctionalgroups,
-      title={From molecules to scaffolds to functional groups: building context-dependent molecular representation via multi-channel learning}, 
-      author={Yue Wan and Jialu Wu and Tingjun Hou and Chang-Yu Hsieh and Xiaowei Jia},
-      year={2023},
-      eprint={2311.02798},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2311.02798}, 
+@Article{Wan2025,
+         title={Multi-channel learning for integrating structural hierarchies into context-dependent molecular representation},
+         author={Wan, Yue and Wu, Jialu and Hou, Tingjun and Hsieh, Chang-Yu and Jia, Xiaowei},
+         journal={Nature Communications},
+         year={2025}, month={Jan}, day={06},
+         volume={16}, number={1}, pages={413},
+         issn={2041-1723},
+         doi={10.1038/s41467-024-55082-4},
+         url={https://doi.org/10.1038/s41467-024-55082-4}
 }
 ```
+
+Thanks!
