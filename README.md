@@ -28,20 +28,20 @@ python ./scripts/precompute.py --smiles_path <smiles_txt_file> --fragment_path <
 
 This command will generate the required lmdb files for pre-training. 
 
-## Pre-training:
+## Pre-training
 The configuration for pre-training, including model backbone, number of layers, and etc., can all be specified in `./config/pretrain.yaml` file. After the configuration file is setup, simply run the following command for multi-gpu training.
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -u -m torch.distributed.run --nproc_per_node=2 --nnodes=1 --master_port 12325 ./scripts/pretrain.py
 ```
 We provide two pre-trained checkpoints (with GIN and GPS backbone) [here](https://drive.google.com/drive/folders/1G_Yejbv8LCkV5guSf1WOJq2v3Nx55e58). Put the `./checkpoint` folder in the main directory.
 
-## Fine-tuning:
+## Fine-tuning
 The configuration files for fine-tuning MoleculeNet and MoleculeACE are located in `./config/moleculenet` and `./config/moleculeace`, respectively. The description of the available training options can be found in the yaml file. Run the command below for fine-tuning a specific dataset:
 ```
 python ./scripts/finetune.py <data_folder>/<data_name>  # e.g., moleculenet/bace
 ```
 
-## References:
+## References
 If you find this work useful, please cite by:
 
 Wan, Y., Wu, J., Hou, T. et al. Multi-channel learning for integrating structural hierarchies into context-dependent molecular representation. Nat Commun 16, 413 (2025). https://doi.org/10.1038/s41467-024-55082-4
