@@ -28,11 +28,11 @@ optim:
 
 prompt_optim:
   skip_bo: True                                   # whether apply bayesian optimization
-  inits: [0, 0, 0]                                # predefined the initial prompt weight
+  inits: # [0, 0, 0]                                # predefined the initial prompt weight
 
 dataset:
-  data_dir: ./data/finetune/moleculenet           # data directory
-  data_name: bbbp                                 # dataset name
+  data_dir: ./data/finetune/moleculeace           # data directory
+  data_name:                                      # dataset name
   num_workers: 0                                  # number of workers in dataloader
   feat_type: super_rich                           # whether use basic/rich/super_rich feature
-  task: classification                            # classification/regression task
+  task: regression                                # classification/regression task
